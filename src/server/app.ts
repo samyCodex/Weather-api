@@ -5,8 +5,8 @@ import IndexRouter from '../routes/index';
 const app: Application = express();
 
 const allowedOrigins = [
-    'https://illustrious-platypus-f7576f.netlify.app',
-    'http://localhost:5174', // Add other origins as needed
+    'https://illustrious-platypus-f7576f.netlify.app/',
+    'http://localhost:5174/', // Add other origins as needed
 ];
 
 const corsOptions = {
