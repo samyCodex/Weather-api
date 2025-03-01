@@ -4,9 +4,19 @@ import IndexRouter from '../routes/index';
 
 const app: Application = express();
 
-// Initialize the cors middleware
+const allowedOrigins = [
+    'https://illustrious-platypus-f7576f.netlify.app',
+    'http://localhost:5174', // Add other origins as needed
+];
+
 const corsOptions = {
-    origin: 'https://illustrious-platypus-f7576f.netlify.app', // Your frontend URL
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'OPTIONS'],
 };
 
