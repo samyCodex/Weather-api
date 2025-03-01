@@ -7,19 +7,8 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const index_1 = __importDefault(require("../routes/index"));
 const app = (0, express_1.default)();
-const allowedOrigins = [
-    'https://illustrious-platypus-f7576f.netlify.app/',
-    'http://localhost:5174/', // Add other origins as needed
-];
 const corsOptions = {
-    origin: (origin, callback) => {
-        if (allowedOrigins.includes(origin) || !origin) {
-            callback(null, true);
-        }
-        else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: '*', // Replace with your frontend URL for better security
     methods: ['GET', 'POST', 'OPTIONS'],
 };
 app.use((0, cors_1.default)(corsOptions));
