@@ -4,13 +4,14 @@ import IndexRouter from '../routes/index';
 
 const app: Application = express();
 
-
 const corsOptions = {
-    origin: '*', // Replace with your frontend URL for better security
+    origin: 'https://illustrious-platypus-f7576f.netlify.app', // Replace with your frontend URL
     methods: ['GET', 'POST', 'OPTIONS'],
+    credentials: true, // Allow credentials (if needed)
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable preflight requests for all routes
 
 app.use(express.json());
 
