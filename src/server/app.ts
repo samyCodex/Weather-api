@@ -1,7 +1,6 @@
 import express, {Application, Request, Response} from 'express';
 import IndexRouter from '../routes/index';
 import cors from 'cors'
-// import '../integration/aiUtils'
 const app: Application = express();
 
 app.use(cors());
