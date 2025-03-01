@@ -8,6 +8,9 @@ const corsOptions = {
     origin: 'https://illustrious-platypus-f7576f.netlify.app', // Replace with your frontend URL
     methods: ['GET', 'POST', 'OPTIONS'],
     credentials: true, // Allow credentials (if needed)
+    headers: {
+        "Access-Control-Allow-Origin": "*"
+    }
 };
 
 app.use(cors(corsOptions));
