@@ -1,23 +1,24 @@
 import express, {Application, Request, Response} from 'express';
 import IndexRouter from '../routes/index';
 import cors from 'cors'
+// import '../integration/aiUtils'
 const app: Application = express();
 
-const whitelist = ['http://localhost:5174', 'https://illustrious-platypus-f7576f.netlify.app']
-const corsOptionsDelegate = function (req, callback) {
-let corsOptions;
-  if (whitelist.indexOf(req.header('Origin')) !== -1) {
-    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false } // disable CORS for this request
+app.use(cors());
+export default function handler(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Or replace * with your frontend URL
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+    res.status(200).json({ message: 'Weather data' });
   }
-  callback(null, corsOptions) // callback expects two parameters: error and options
-}
+  
+
 app.use(express.json());
-app.get('/', cors(corsOptionsDelegate), (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response) => {
     res.send('Server is Online');
 });
-app.use('/api', cors(corsOptionsDelegate), IndexRouter);
+app.use('/api', IndexRouter);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

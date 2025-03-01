@@ -3,26 +3,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = handler;
 const express_1 = __importDefault(require("express"));
 const index_1 = __importDefault(require("../routes/index"));
 const cors_1 = __importDefault(require("cors"));
+// import '../integration/aiUtils'
 const app = (0, express_1.default)();
-const whitelist = ['http://example1.com', 'http://example2.com'];
-const corsOptionsDelegate = function (req, callback) {
-    let corsOptions;
-    if (whitelist.indexOf(req.header('Origin')) !== -1) {
-        corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
-    }
-    else {
-        corsOptions = { origin: false }; // disable CORS for this request
-    }
-    callback(null, corsOptions); // callback expects two parameters: error and options
-};
+app.use((0, cors_1.default)());
+function handler(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Or replace * with your frontend URL
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.status(200).json({ message: 'Weather data' });
+}
 app.use(express_1.default.json());
-app.get('/', (0, cors_1.default)(corsOptionsDelegate), (req, res) => {
+app.get('/', (req, res) => {
     res.send('Server is Online');
 });
-app.use('/api', (0, cors_1.default)(corsOptionsDelegate), index_1.default);
+app.use('/api', index_1.default);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log('Server is running on port http://localhost:' + PORT);
