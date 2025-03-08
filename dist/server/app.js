@@ -8,9 +8,12 @@ const cors_1 = __importDefault(require("cors"));
 const index_1 = __importDefault(require("../routes/index"));
 const app = (0, express_1.default)();
 const corsOptions = {
-    origin: 'https://illustrious-platypus-f7576f.netlify.app', // Replace with your frontend URL
+    origin: ['https://illustrious-platypus-f7576f.netlify.app', 'http://localhost:5173/'], // Replace with your frontend URL
     methods: ['GET', 'POST', 'OPTIONS'],
     credentials: true, // Allow credentials (if needed)
+    headers: {
+        "Access-Control-Allow-Origin": "*"
+    }
 };
 app.use((0, cors_1.default)(corsOptions));
 app.options('*', (0, cors_1.default)(corsOptions)); // Enable preflight requests for all routes

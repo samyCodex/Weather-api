@@ -5,7 +5,7 @@ import IndexRouter from '../routes/index';
 const app: Application = express();
 
 const corsOptions = {
-    origin: 'https://illustrious-platypus-f7576f.netlify.app', // Replace with your frontend URL
+    origin: ['https://illustrious-platypus-f7576f.netlify.app', 'http://localhost:5173/'], // Replace with your frontend URL
     methods: ['GET', 'POST', 'OPTIONS'],
     credentials: true, // Allow credentials (if needed)
     headers: {
